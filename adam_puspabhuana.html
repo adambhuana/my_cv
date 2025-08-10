@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Puspabhuana - AI Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,0 1000,300 1000,1000 0,700"/><polygon fill="%23ffffff04" points="0,300 1000,100 1000,400 0,600"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chat-prompt {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .chat-icon {
+            font-size: 3rem;
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chat-prompt h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-prompt p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .example-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .example-card i {
+            font-size: 2rem;
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+        }
+
+        .example-card h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .chat-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Chat widget styling override */
+        .n8n-chat {
+            z-index: 1001 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i> Adam AI
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="profile-image">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            
+            <h1 class="hero-title">Adam Puspabhuana</h1>
+            <h2 class="hero-subtitle">AI-Powered Personal Assistant</h2>
+            <p class="hero-description">
+                Halo! Saya Adam, asisten virtual yang siap membantu Anda 24/7. 
+                Dengan teknologi AI terdepan, saya dapat menjawab pertanyaan, memberikan informasi, 
+                dan membantu menyelesaikan berbagai tugas Anda dengan cepat dan akurat.
+            </p>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <div class="chat-prompt">
+                    <div class="chat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>💬 Mulai Percakapan</h3>
+                    <p>Klik tombol chat di pojok kanan bawah untuk memulai percakapan dengan saya. Saya siap membantu Anda!</p>
+                    
+                    <div class="chat-examples">
+                        <div class="example-card" onclick="openChatWithMessage('Halo Adam, ceritakan tentang dirimu')">
+                            <i class="fas fa-user"></i>
+                            <h4>Tentang Adam</h4>
+                            <p>Pelajari lebih lanjut tentang latar belakang dan kemampuan saya</p>
+                        </div>
+                        
+                        <div class="example-card" onclick="openChatWithMessage('Apa yang bisa kamu bantu?')">
+                            <i class="fas fa-question-circle"></i>
+                            <h4>Bantuan Umum</h4>
+                            <p>Tanyakan apa saja yang bisa saya bantu untuk Anda</p>
+                        </div>
+                        
+                        <div class="example-card" onclick="openChatWithMessage('Bagaimana cara menghubungi Adam?')">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Kontak & Info</h4>
+                            <p>Dapatkan informasi kontak dan cara menghubungi saya</p>
+                        </div>
+                        
+                        <div class="example-card" onclick="openChatWithMessage('Jelaskan skill dan pengalaman Adam')">
+                            <i class="fas fa-briefcase"></i>
+                            <h4>Skill & Pengalaman</h4>
+                            <p>Ketahui lebih detail tentang keahlian dan pengalaman kerja</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="about">
+        <div class="features-container">
+            <h2 class="features-title">🚀 Mengapa Pilih Adam AI?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>24/7 Availability</h3>
+                    <p>Saya tersedia kapan saja, siap membantu Anda tanpa mengenal waktu. Tidak ada lagi menunggu balasan!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart AI Technology</h3>
+                    <p>Menggunakan teknologi AI terdepan untuk memberikan jawaban yang akurat dan relevan sesuai kebutuhan Anda.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy & Security</h3>
+                    <p>Percakapan Anda aman dan terjaga. Privasi dan keamanan data adalah prioritas utama kami.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Quick Response</h3>
+                    <p>Dapatkan jawaban instan tanpa perlu menunggu. Efisiensi dan kecepatan adalah kunci layanan kami.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Multilingual Support</h3>
+                    <p>Komunikasi dalam bahasa Indonesia maupun Inggris dengan pemahaman konteks yang natural.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Continuous Learning</h3>
+                    <p>Semakin sering berinteraksi, semakin baik dalam memahami preferensi dan kebutuhan Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <p>&copy; 2025 Adam Puspabhuana. Powered by AI Technology.</p>
+        <p>Ready to assist you 24/7 • Start chatting now!</p>
+    </footer>
+
+    <!-- N8N Chat Widget -->
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        window.chatInstance = createChat({
+            webhookUrl: 'https://n8n-deax7yimgqyu.axwy.sumopod.my.id/webhook/c2abc549-e189-41e6-8c91-9c2d273072f0/chat',
+            initialMessages: [
+                'Hi there! 👋',
+                'My name is Adam. How can I assist you today?'
+            ],
+            i18n: {
+                en: {
+                    title: 'Hi there! 👋',
+                    subtitle: "Start a chat. Help you to know better about me",
+                    footer: '',
+                    getStarted: 'New Conversation',
+                    inputPlaceholder: 'Type your question..',
+                },
+            }
+        });
+
+        // Function to open chat with predefined message
+        window.openChatWithMessage = function(message) {
+            // Open the chat widget first
+            const chatButton = document.querySelector('.n8n-chat-button');
+            if (chatButton) {
+                chatButton.click();
+                
+                // Wait a bit for the chat to open, then send the message
+                setTimeout(() => {
+                    const chatInput = document.querySelector('.n8n-chat input');
+                    if (chatInput) {
+                        chatInput.value = message;
+                        // Trigger submit
+                        const submitButton = document.querySelector('.n8n-chat button[type="submit"]');
+                        if (submitButton) {
+                            submitButton.click();
+                        }
+                    }
+                }, 500);
+            }
+        };
+
+        // Add click handlers for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add floating animation to example cards
+        document.querySelectorAll('.example-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('fadeInUp');
+        });
+    </script>
+
+    <style>
+        .fadeInUp {
+            animation: fadeInUp 0.8s ease-out both;
+        }
+    </style>
+</body>
+</html>
