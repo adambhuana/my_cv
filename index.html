@@ -476,6 +476,8 @@
                 'Hi there! 👋',
                 'My name is Adam. How can I assist you today?'
             ],
+            allowFileUploads: true,
+            allowedFilesMimeTypes: 'image/*,application/pdf,text/*,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             i18n: {
                 en: {
                     title: 'Hi there! 👋',
@@ -484,11 +486,7 @@
                     getStarted: 'New Conversation',
                     inputPlaceholder: 'Type your question..',
                 },
-            },
-            // ✅ Enable file uploads
-            allowFileUploads: true,
-            // ✅ Restrict allowed MIME types (leave '' to allow all)
-            allowedFilesMimeTypes: 'image/*,application/pdf,text/plain'
+            }
         });
 
         // Function to open chat with predefined message
@@ -541,4 +539,5 @@
     </style>
 </body>
 </html>
+
 
