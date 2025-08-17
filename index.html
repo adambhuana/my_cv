@@ -484,7 +484,11 @@
                     getStarted: 'New Conversation',
                     inputPlaceholder: 'Type your question..',
                 },
-            }
+            },
+            // ✅ Enable file uploads
+            allowFileUploads: true,
+            // ✅ Restrict allowed MIME types (leave '' to allow all)
+            allowedFilesMimeTypes: 'image/*,application/pdf,text/plain'
         });
 
         // Function to open chat with predefined message
@@ -537,3 +541,4 @@
     </style>
 </body>
 </html>
+
