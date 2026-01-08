@@ -6,7 +6,7 @@ app.use(express.json({ limit: "10mb" }));
 
 // URL Apps Script kamu
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxFP8-HnuKxETR74pvUc5nzMOVnBMHuvUjDqJ71_q2VG6PAV_PrjydTp30m_r9MNiqPSA/exec";
+  "https://script.google.com/macros/s/AKfycbwm4PIgUTSjDY6r_h6fg1qbA3ai2Mfwwx-4r1Kacas8HKUC-_7L8Dywvs3kBBnZnGw_zA/exec";
 
 // Proxy route untuk upload CV
 app.post("/upload", async (req, res) => {
