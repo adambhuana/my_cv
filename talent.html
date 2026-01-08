@@ -655,7 +655,7 @@ async function register() {
   showStatus('registerStatus', '⏳ Mendaftarkan akun...', 'info');
 
   try {
-    const { error } = await supabase.rpc('register_user', {
+    const { error } = await db.rpc('register_user', {
       p_email: email,
       p_password: password,
       p_full_name: fullName,
@@ -867,6 +867,7 @@ function switchAuthTab(tab) {
 
 </body>
 </html>
+
 
 
 
