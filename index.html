@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam AI – Sistem Asisten & Rekrutmen Berbasis AI</title>
+    <title>TalentTalk AI – Smart Recruitment Assistant</title>
 
     <!-- External CSS -->
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: radial-gradient(circle at top, #1e3c72, #2a5298);
             min-height: 100vh;
             color: white;
         }
@@ -29,9 +29,9 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
         .nav-container {
@@ -46,6 +46,9 @@
         .logo {
             font-size: 1.4rem;
             font-weight: bold;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
         }
 
         .nav-links {
@@ -68,15 +71,9 @@
         .login-btn {
             padding: 0.6rem 1.4rem;
             border-radius: 30px;
-            background: linear-gradient(45deg, #4ecdc4, #6cdbeb);
-            color: #1a1a1a !important;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #08121f !important;
             font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(78,205,196,0.4);
         }
 
         /* ================= HERO ================= */
@@ -85,37 +82,40 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
+            padding: 9rem 2rem 4rem;
             text-align: center;
-            position: relative;
         }
 
         .hero-content {
-            max-width: 850px;
+            max-width: 900px;
         }
 
+        /* IMAGE 2 – AI AVATAR */
         .avatar {
-            width: 140px;
-            height: 140px;
+            width: 160px;
+            height: 160px;
             margin: auto;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
+            background: url("adam_puspabhuana.jpg") center/cover no-repeat;
+            box-shadow: 0 0 30px rgba(79,172,254,0.9);
+            margin-bottom: 1.8rem;
+            animation: pulse 3s infinite;
+            transition: transform 0.4s ease;
         }
 
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .avatar:hover {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 25px rgba(79,172,254,0.6); }
+            50% { box-shadow: 0 0 45px rgba(0,242,254,1); }
+            100% { box-shadow: 0 0 25px rgba(79,172,254,0.6); }
         }
 
         .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 3rem;
+            margin-bottom: 0.4rem;
         }
 
         .hero h2 {
@@ -125,9 +125,9 @@
         }
 
         .hero p {
-            opacity: 0.85;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
+            opacity: 0.88;
+            line-height: 1.7;
+            margin-bottom: 2.2rem;
         }
 
         .hero-actions {
@@ -140,8 +140,8 @@
         .primary-btn {
             padding: 0.9rem 2rem;
             border-radius: 40px;
-            background: linear-gradient(45deg, #4ecdc4, #6cdbeb);
-            color: #1a1a1a;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #08121f;
             font-weight: bold;
             text-decoration: none;
         }
@@ -157,7 +157,7 @@
         /* ================= FEATURES ================= */
         .features {
             padding: 4rem 2rem;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
         }
 
         .features h2 {
@@ -175,7 +175,7 @@
         }
 
         .feature-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.12);
             padding: 2rem;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.2);
@@ -188,30 +188,16 @@
 
         .feature-card i {
             font-size: 2.5rem;
-            color: #4ecdc4;
+            color: #4facfe;
             margin-bottom: 1rem;
         }
 
-        /* ================= FOOTER ================= */
         footer {
             padding: 2rem;
             text-align: center;
-            background: rgba(0,0,0,0.2);
-            opacity: 0.85;
+            background: rgba(0,0,0,0.3);
         }
 
-        /* ================= RESPONSIVE ================= */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.4rem;
-            }
-        }
-
-        /* Chat widget priority */
         .n8n-chat {
             z-index: 2000 !important;
         }
@@ -220,82 +206,78 @@
 
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="nav-container">
         <div class="logo">
-            <i class="fas fa-robot"></i> Adam AI
+            <i class="fas fa-comments"></i> TalentTalk AI
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#features">Fitur</a></li>
-            <li><a href="#contact">Kontak</a></li>
             <li>
                 <a href="talent.html" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login Kandidat
+                    <i class="fas fa-user"></i> Login Kandidat
                 </a>
             </li>
         </ul>
     </div>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <div class="avatar">
-            <i class="fas fa-user-tie"></i>
-        </div>
+        <div class="avatar"></div>
         <h1>Adam Puspabhuana</h1>
-        <h2>AI Assistant & Smart Recruitment System</h2>
+        <h2>TalentTalk AI – Smart Recruitment Assistant</h2>
         <p>
-            Asisten berbasis Kecerdasan Buatan untuk membantu kandidat dan perusahaan
-            dalam proses rekrutmen, analisis CV, serta interaksi cerdas 24/7.
+            <strong>TalentTalk AI</strong> adalah aplikasi berbasis kecerdasan buatan (AI) yang
+            dirancang untuk membantu proses rekrutmen melalui percakapan interaktif
+            antara rekruter dan kandidat.
+            <br><br>
+            Aplikasi ini memungkinkan tanya jawab awal, screening, serta pengumpulan
+            data kandidat secara sistematis sebelum tahap wawancara.
+            Dengan teknologi <em>Natural Language Processing</em>, TalentTalk AI mampu
+            memahami respons kandidat, mengelola data, dan menghasilkan ringkasan
+            evaluasi untuk rekruter.
         </p>
 
         <div class="hero-actions">
-            <a href="talent.html" class="primary-btn">🚀 Masuk sebagai Kandidat</a>
-            <a href="#features" class="secondary-btn">Pelajari Fitur</a>
+            <a href="talent.html" class="primary-btn">🚀 Mulai sebagai Kandidat</a>
+            <a href="#features" class="secondary-btn">Lihat Fitur</a>
         </div>
     </div>
 </section>
 
-<!-- FEATURES -->
 <section class="features" id="features">
-    <h2>🚀 Fitur Unggulan</h2>
+    <h2>🚀 Fitur TalentTalk AI</h2>
     <div class="features-grid">
         <div class="feature-card">
+            <i class="fas fa-comments"></i>
+            <h3>Chatbot Interaktif</h3>
+            <p>Percakapan AI untuk screening awal kandidat.</p>
+        </div>
+        <div class="feature-card">
             <i class="fas fa-brain"></i>
-            <h3>AI Analisis CV</h3>
-            <p>Menganalisis CV kandidat secara otomatis dan objektif.</p>
+            <h3>NLP Intelligence</h3>
+            <p>Memahami dan menganalisis jawaban kandidat.</p>
         </div>
-
         <div class="feature-card">
-            <i class="fas fa-clock"></i>
-            <h3>24/7 Assistant</h3>
-            <p>Asisten virtual selalu aktif kapan pun dibutuhkan.</p>
+            <i class="fas fa-database"></i>
+            <h3>Manajemen Data</h3>
+            <p>Data kandidat tersimpan rapi dan terstruktur.</p>
         </div>
-
-        <div class="feature-card">
-            <i class="fas fa-shield-alt"></i>
-            <h3>Keamanan Data</h3>
-            <p>Data kandidat dan perusahaan dijaga dengan standar keamanan tinggi.</p>
-        </div>
-
         <div class="feature-card">
             <i class="fas fa-chart-line"></i>
-            <h3>Insight Rekrutmen</h3>
-            <p>Membantu HR mengambil keputusan berbasis data.</p>
+            <h3>Ringkasan Evaluasi</h3>
+            <p>Output ringkas untuk membantu keputusan HR.</p>
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="contact">
     <p>&copy; 2025 Adam Puspabhuana</p>
-    <p>Sistem Otomatisasi & Asisten AI</p>
+    <p>Powered by TalentTalk AI</p>
 </footer>
 
-<!-- N8N CHAT -->
 <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
@@ -303,13 +285,13 @@
         webhookUrl: 'https://n8n-w0kfee8uiagq.arman.sumopod.my.id/webhook/c2abc549-e189-41e6-8c91-9c2d273072f0/chat',
         initialMessages: [
             'Halo 👋',
-            'Saya Adam AI, siap membantu Anda.'
+            'Saya TalentTalk AI, siap membantu proses rekrutmen Anda.'
         ],
         i18n: {
             en: {
-                title: 'Adam AI',
-                subtitle: 'Asisten & Sistem Rekrutmen AI',
-                inputPlaceholder: 'Ketik pertanyaan Anda...'
+                title: 'TalentTalk AI',
+                subtitle: 'Interactive Recruitment Assistant',
+                inputPlaceholder: 'Tulis jawaban Anda di sini...'
             }
         }
     });
