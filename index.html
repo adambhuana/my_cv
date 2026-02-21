@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentTalk AI – Smart Recruitment Assistant</title>
+
+    <!-- External CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-comments"></i> TalentTalk AI
+            </a>
+
+            <!-- Hamburger -->
+            <button class="mobile-menu-btn" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Fitur</a></li>
+                <li>
+                    <a href="talent.html" class="btn btn-primary">
+                        <i class="fas fa-user"></i> Login Kandidat
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content animate-fade-in">
+            <div class="avatar-container">
+                <img src="adam_puspabhuana.JPG" alt="AI Avatar" class="avatar">
+            </div>
+            <h1 class="hero-title">Recruitment Revolution</h1>
+            <h2 class="hero-subtitle">Smart Assistant by Adam Puspabhuana</h2>
+            <p class="hero-description">
+                <strong>TalentTalk AI</strong> mentransformasi proses rekrutmen Anda.
+                Screening otomatis, interaksi natural, dan analisis data kandidat yang cerdas.
+            </p>
+
+            <div class="hero-actions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="talent.html" class="btn btn-primary">🚀 Mulai sebagai Kandidat</a>
+                <a href="#features" class="btn btn-secondary">Pelajari Fitur</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Fitur Unggulan</h2>
+            <div class="features-grid">
+                <div class="card">
+                    <i class="fas fa-comments feature-icon"></i>
+                    <h3 class="feature-title">Chatbot Interaktif</h3>
+                    <p class="feature-text">Interaksi natural layaknya manusia untuk screening awal yang efisien dan
+                        menarik bagi kandidat.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-brain feature-icon"></i>
+                    <h3 class="feature-title">AI Intelligence</h3>
+                    <p class="feature-text">Teknologi NLP canggih yang memahami konteks jawaban dan memberikan penilaian
+                        objektif.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-database feature-icon"></i>
+                    <h3 class="feature-title">Smart Database</h3>
+                    <p class="feature-text">Manajemen data terpusat dengan keamanan tinggi dan akses mudah untuk
+                        rekruter.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">Insight & Analitik</h3>
+                    <p class="feature-text">Ringkasan evaluasi komprehensif untuk mendukung pengambilan keputusan
+                        berbasis data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Adam Puspabhuana. Powered by TalentTalk AI.</p>
+    </footer>
+
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'https://n8n-w0kfee8uiagq.arman.sumopod.my.id/webhook/c2abc549-e189-41e6-8c91-9c2d273072f0/chat',
+            initialMessages: [
+                'Halo 👋',
+                'Saya TalentTalk AI, siap membantu proses rekrutmen Anda.'
+            ],
+            i18n: {
+                en: {
+                    title: 'TalentTalk AI',
+                    subtitle: 'Interactive Recruitment Assistant',
+                    inputPlaceholder: 'Tulis jawaban Anda di sini...'
+                }
+            }
+        });
+    </script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Toggle icon between bars and times
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+
+</html>
