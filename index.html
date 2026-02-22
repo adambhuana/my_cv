@@ -34,6 +34,12 @@
                         <i class="fas fa-user"></i> Login Kandidat
                     </a>
                 </li>
+                <li>
+                    <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_1501kj2ezmnpe6wa3veqkm8hwzn2&branch_id=agtbrch_6001kj2ezne5e3drgzj033775x87"
+                        target="_blank" rel="noopener noreferrer" class="btn btn-red">
+                        <i class="fas fa-microphone"></i> Chat Voice
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
@@ -93,10 +99,12 @@
         <p>&copy; 2025 Adam Puspabhuana. Powered by TalentTalk AI.</p>
     </footer>
 
+
+
     <script type="module">
         import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-        createChat({
+        window._n8nChat = createChat({
             webhookUrl: 'https://n8n-w0kfee8uiagq.arman.sumopod.my.id/webhook/c2abc549-e189-41e6-8c91-9c2d273072f0/chat',
             initialMessages: [
                 'Halo 👋',
@@ -111,13 +119,30 @@
             }
         });
     </script>
+
+    <style>
+        /* Red nav buttons */
+        .btn-red {
+            background: linear-gradient(45deg, #ff416c, #e53935);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.35);
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-red:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(229, 57, 53, 0.55);
+        }
+    </style>
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Toggle icon between bars and times
             const icon = menuToggle.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -136,6 +161,8 @@
                 menuToggle.querySelector('i').classList.add('fa-bars');
             }
         });
+
+
     </script>
 </body>
 
