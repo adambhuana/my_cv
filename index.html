@@ -59,6 +59,16 @@
             <div class="avatar-container">
                 <img src="adam_puspabhuana.JPG" alt="AI Avatar" class="avatar">
             </div>
+
+            <!-- Collaboration CTA -->
+            <div class="collab-cta">
+                <p class="collab-text">Tertarik berkolaborasi? Ajukan diskusi atau presentasi khusus bersama kami.</p>
+                <a href="https://konsultasi.adambhuana.my.id" target="_blank" rel="noopener noreferrer" class="btn btn-collab">
+                    <i class="fas fa-handshake"></i> Jadwalkan Konsultasi
+                    <span class="collab-badge">FREE</span>
+                </a>
+            </div>
+
             <h1 class="hero-title">Recruitment Revolution</h1>
             <h2 class="hero-subtitle">Smart Assistant by Adam Puspabhuana</h2>
             <p class="hero-description">
@@ -145,6 +155,101 @@
         .btn-red:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(229, 57, 53, 0.55);
+        }
+
+        /* Collaboration CTA */
+        .collab-cta {
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .collab-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-collab {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #f59e0b, #f97316, #ef4444);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 60px;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            box-shadow:
+                0 0 20px rgba(249, 115, 22, 0.4),
+                0 0 60px rgba(249, 115, 22, 0.15),
+                0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-collab::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        .btn-collab:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow:
+                0 0 30px rgba(249, 115, 22, 0.6),
+                0 0 80px rgba(249, 115, 22, 0.25),
+                0 12px 40px rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .collab-badge {
+            background: #fff;
+            color: #ef4444;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
     <script>
